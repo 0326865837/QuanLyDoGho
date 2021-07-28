@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Sanpham";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Đồ gỗ nhóm 5</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Sản phẩm đồ gỗ</li>
+        </ol>
+        <a href="@Url.Action("Them","Home")">Thêm sản phẩm</a><br />
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Xem thông tin sản phẩm
+            </div>
+
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Mã loại</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Kích thước</th>
+                            <th>Chất liệu</th>
+                            <th>Đơn giá</th>
+                            <th>Ảnh</th>
+                            <th>Số lượng tồn</th>
+                            <th>Mô tả</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Mã loại</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Kích thước</th>
+                            <th>Chất liệu</th>
+                            <th>Đơn giá</th>
+                            <th>Ảnh</th>
+                            <th>Số lượng tồn</th>
+                            <th>Mô tả</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>dogo4</td>
+                            <td>ban1</td>
+                            <td>Bàn ghế hoàng gia</td>
+                            <td>rộng</td>
+                            <td>Gỗ lim</td>
+                            <td>60000000</td>
+                            <td>banghe1.jpg</td>
+                            <td>2</td>
+                            <td>Hàng hiếm</td>
+                            <td>
+
+                                <a href="@Url.Action("Sua","Home")">Sửa</a>|
+                                <a href="@Url.Action("Xoa","Home")">Xóa</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

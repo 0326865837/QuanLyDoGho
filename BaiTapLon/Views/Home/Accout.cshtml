@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Accout";
+}
+
+<section id=form>
+    <div class="container">
+        <div class="row">
+            <form action="#">
+                <div class="col-sm-4 col-sm-offset-1">
+                    <div class="edit-form">
+                        <h2>Cập nhật thông tin tài khoản</h2>
+                        <input type="text" name="username" id="username" placeholder="Tên tài khoản" />
+                        <input type="text" name="Họ và tên" id="name" placeholder="Họ và tên" />
+                        <input type="text" name="address" id="address" placeholder="Địa chỉ" />
+                        <input type="text" name="email" id="email" placeholder="Email" />
+                        <input type="password" name="password" placeholder="Password" />
+                        <label for="birth-day" class="birth-day">
+                            <span>Ngày sinh</span>
+                            <div>
+                                <SELECT id="day" name="dd"></SELECT>
+                                <SELECT id="month" name="mm" onchange="change_month(this)"></SELECT>
+                                <SELECT id="year" name="yyyy" onchange="change_year(this)"></SELECT>
+                            </div>
+                        </label>
+                        <button type="submit" class="btn btn-default">Cập nhật</button>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-sm-offset-1 d-flex upload-img">
+                    <img src="~/wwwroot/images/accout/no-image-icon-23485.png" />
+                    <button class="btn-upload-img">Chọn ảnh</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+

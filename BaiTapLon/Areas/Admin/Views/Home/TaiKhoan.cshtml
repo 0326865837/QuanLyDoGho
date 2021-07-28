@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "TaiKhoan";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Đồ gỗ nhóm 5</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Tài khoản</li>
+        </ol>
+        <a href="@Url.Action("Them","Home")">Thêm tài khoản</a><br />
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Xem thông tin tài khoản
+            </div>
+
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Mã khách hàng</th>
+                            <th>Tên khách hàng</th>
+                            <th>Địa chỉ</th>
+                            <th>Email</th>
+                            <th>Điện thoại</th>
+                            <th>Tên đăng nhập</th>
+                            <th>Mật khẩu</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Mã khách hàng</th>
+                            <th>Tên khách hàng</th>
+                            <th>Địa chỉ</th>
+                            <th>Email</th>
+                            <th>Điện thoại</th>
+                            <th>Tên đăng nhập</th>
+                            <th>Mật khẩu</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>kh2</td>
+                            <td>Nguyễn Đức Huy</td>
+                            <td>Hà Nội</td>
+                            <td>huychipheo@gmail.com</td>
+                            <td>04115</td>
+                            <td>huychipheo</td>
+                            <td>123456</td>
+                            <td>
+
+                                <a href="@Url.Action("Sua","Home")">Sửa</a>|
+                                <a href="@Url.Action("Xoa","Home")">Xóa</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>kh2</td>
+                            <td>Nguyễn Duy Hiếu</td>
+                            <td>Hà Nội</td>
+                            <td>duyhiu125@gmail.com</td>
+                            <td>04116</td>
+                            <td>hieuhentai</td>
+                            <td>123456</td>
+                            <td>
+
+                                <a href="@Url.Action("Sua","Home")">Sửa</a>|
+                                <a href="@Url.Action("Xoa","Home")">Xóa</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+

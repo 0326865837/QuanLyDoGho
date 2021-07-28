@@ -1,0 +1,355 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="slider">
+    <!--slider-->
+    @{
+        Html.RenderPartial("_Slider");
+    }
+    <!--/slider-->
+</section>
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="left-sidebar">
+            <h2>Danh mục</h2>
+            <div class="panel-group category-products" id="accordian">
+                <!--category-productsr-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#">Bàn ghế phóng khách</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="#">Đồng hồ cây</a></h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="#">Giường</a></h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="#">Kệ tivi</a></h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#">Bàn Ghế phòng ăn</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#">Bàn ghế trang điểm</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="#">Bàn Trà</a></h4>
+                    </div>
+                </div>
+            </div>
+            <!--/category-products-->
+        </div>
+    </div>
+
+    <div class="col-sm-9 padding-right">
+        <div class="product-details">
+            <!--product-details-->
+            <div class="col-sm-5">
+                <div class="view-product">
+                    <img src="~/wwwroot/images/product-details/1.jpg" />
+                </div>
+                <div id="similar-product" class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="">
+                                <img src="~/wwwroot/images/product-details/2.jpg" />
+                            </a>
+                            <a href="">
+                                <img src="~/wwwroot/images/product-details/3.jpg" />
+                            </a>
+                            <a href="">
+                                <img src="~/wwwroot/images/product-details/4.jpg" />
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="">
+                                <img src="~/wwwroot/images/product-details/2.jpg" />
+                            </a>
+                            <a href="">
+                                <img src="~/wwwroot/images/product-details/3.jpg" />
+                            </a>
+                            <a href="">
+                                <img src="~/wwwroot/images/product-details/4.jpg" />
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="">
+                                <img src="~/wwwroot/images/product-details/2.jpg" />
+                            </a>
+                            <a href="">
+                                <img src="~/wwwroot/images/product-details/3.jpg" />
+                            </a>
+                            <a href="">
+                                <img src="~/wwwroot/images/product-details/4.jpg" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left item-control" href="#similar-product" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="right item-control" href="#similar-product" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="product-information">
+                    <!--/product-information-->
+                    <img src="images/product-details/new.jpg" class="newarrival" alt="" />
+                    <h2>Bộ Bàn Ghế Hoàng Gia Siêu Víp Gỗ Hương Đá</h2>
+                    <p>ID: 1089772</p>
+                    <img src="images/product-details/rating.png" alt="" />
+                    <span>
+                        <span>68.000.000₫</span>
+                        <div style="float: left;">
+                            <label>Số lượng:</label>
+                            <input type="text" value="3" />
+                            <button type="button" class="btn btn-fefault cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                Thêm vào giỏ hàng
+                            </button>
+                        </div>
+                    </span>
+                    <a href="">
+                        <img src="~/wwwroot/images/product-details/share.png" class="share img-responsive" alt="" />
+                    </a>
+                </div>
+                <!--/product-information-->
+            </div>
+        </div>
+        <!--/product-details-->
+
+        <div class="category-tab shop-details-tab">
+            <!--category-tab-->
+            <div class="tab-content">
+
+                <div class="tab-pane fade active in" id="reviews">
+                    <div class="col-sm-12">
+                        <div class="std">
+                            <p>
+                                + Hàng siêu víp , khuôn tranh dày 4p , ván dày 2p , yếm 4p&nbsp;, tay&nbsp;liền đặc nguyên khối ,
+                                vách tựa dày 2p2&nbsp;, bàn liền tấm , hàng đục 2 mặt&nbsp;cực đẹp , Chân 14
+                            </p>
+                            <p>Giá hoàn thiện sơn pu hoặc vecni : 68.000.000d</p>
+                            <p>- Thông Tin Sản Phẩm :</p>
+                            <p>Kích thước : &nbsp;&nbsp;Chân 14</p>
+                            <p>Chất Liệu : Gỗ hương đá</p>
+                            <p>Hàng Gồm 6 món:</p>
+                            <p>+ 01 bàn,</p>
+                            <p>+ 02 ghế,</p>
+                            <p>+ 01 đoản,</p>
+                            <p>+ 01 đôn kẹp</p>
+                            <p>
+                                + 01 đôn ngồi<br>
+                                &nbsp;
+                            </p>
+                            <p>
+                                <strong><em>~~~</em>&gt;&gt;&gt; Lợi Ích Khi Mua Sản Phẩm :&nbsp;</strong><br>
+                                <strong><em>~~ Khi mua sản phẩm Tặng ngay 1 khay trà hương đỏ lên tới 600k&nbsp;</em></strong><br>
+                                <strong><em>~~~&nbsp;Khi Mua Hoàn Thiện Tặng Ngay Kính Bàn, Kính Đôn kẹp</em></strong>
+                            </p>
+                            <p>
+                                <em><strong>~~~ Miễn phí giao hàng bán kính 50km ~~~&nbsp;</strong></em><br>
+                                <strong>
+                                    -<em>
+                                        &gt;&gt;&gt; Chú Ý : Ưu Đãi Đặc Biệt Khi Quý Khách Mua 3 sản phẩm cùng 1 lúc bên công
+                                        ty chúng tôi có khuyến mãi giảm giá tất lên đến 3% tổng hóa đơn giá trị sản phẩm
+                                        !&nbsp;
+                                    </em>
+                                </strong>
+                            </p>
+                            <p>
+                                <strong>Hàng bền,đẹp phun PU tỷ mỉ - độ bền trên 500 năm&nbsp;</strong><br>
+                                <strong>Bảo Hành : 50&nbsp;năm&nbsp;&nbsp;mối mọt&nbsp;</strong>
+                            </p>
+                            <p><strong>Xem thêm sản phẩm khác:</strong></p>
+                            <p><strong>1. Bàn ghế phòng khách :<br>
+                            <p>
+                                <strong>Hàng làm tại xưởng không qua trung gian nên giá tận gốc !&nbsp;</strong><br>
+                                <strong>Mời quý khách về xưởng xem hàng thực tế và trao đổi trực tiếp !&nbsp;</strong><br>
+                                <strong>-&gt;Nhận hàng Đặt Theo yêu cầu!</strong><br>
+                                <strong>-&gt;Bán Hàng Toàn Quốc !&nbsp;</strong>
+                            </p>
+                            <p>
+                                <strong>Chúng tôi tự hào và khẳng định rằng:</strong><br>
+                                <br>
+                                <strong>- Chất lượng gỗ Đúng chủng loại 100%;</strong><br>
+                                <strong>- Chất lượng sản phẩm Trong ngoài như nhau.</strong>
+                            </p>
+                            <p>
+                                <strong>
+                                    KHÁCH HÀNG KIỂM TRA MỘC KÝ BẢO ĐẢM SAU ĐÓ CÓ SỞ MỚI BẮT ĐẦU HOÀN THIỆN PHẨN BÊN
+                                    NGOÀI
+                                </strong><br>
+                                &nbsp;
+                            </p>
+                            <p><strong>Mọi chi tiết vui lòng liên hệ:</strong></p>
+                            </p>
+                        </div>
+                        <ul>
+                            <li>
+                                <a href=""><i class="fa fa-user"></i>EUGEN</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-clock-o"></i>12:41 PM</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/category-tab-->
+
+        <div class="recommended_items">
+            <!--recommended_items-->
+            <h2 class="title text-center">Các sản phẩm đáng chũ ý</h2>
+
+            <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <a href="@Url.Action("Product_Details","Home")">
+                                        <div class="productinfo text-center">
+                                            <img src="~/wwwroot/images/product/68586199-241768503446139-5363217278462590976-n.jpg" />
+                                            <h2>9.000.000đ</h2>
+                                            <p>Bộ bàn ghế bằng gỗ bạch đàn</p>
+                                            <a href="product-details.html" class="btn btn-default add-to-cart">
+                                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                                hàng
+                                            </a>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <a href="@Url.Action("Product_Details","Home")">
+                                        <div class="productinfo text-center">
+                                            <img src="~/wwwroot/images/product/68586199-241768503446139-5363217278462590976-n.jpg" />
+                                            <h2>9.000.000đ</h2>
+                                            <p>Bộ bàn ghế bằng gỗ bạch đàn</p>
+                                            <a href="product-details.html" class="btn btn-default add-to-cart">
+                                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                                hàng
+                                            </a>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <a href="@Url.Action("Product_Details","Home")">
+                                        <div class="productinfo text-center">
+                                            <img src="~/wwwroot/images/product/96579233-2557107224530827-16879865718374400-n.jpg" />
+                                            <h2>9.000.000đ</h2>
+                                            <p>Tủ tivi gỗ lim</p>
+                                            <a href="product-details.html" class="btn btn-default add-to-cart">
+                                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                                hàng
+                                            </a>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <a href="@Url.Action("Product_Details","Home")">
+                                        <div class="productinfo text-center">
+                                            <img src="~/wwwroot/images/product/118611090-315583553107513-9123651751773237512-n.jpg" />
+                                            <h2>9.000.000đ</h2>
+                                            <p>Tủ tivi gỗ sồi</p>
+                                            <a href="product-details.html" class="btn btn-default add-to-cart">
+                                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                                hàng
+                                            </a>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <a href="@Url.Action("Product_Details","Home")">
+                                        <div class="productinfo text-center">
+                                            <img src="~/wwwroot/images/product/117073291-2156393444504170-6154227856828935917-o.jpg" />
+                                            <h2>9.000.000đ</h2>
+                                            <p>Bàn thờ gỗ mun</p>
+                                            <a href="product-details.html" class="btn btn-default add-to-cart">
+                                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                                hàng
+                                            </a>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <a href="@Url.Action("Product_Details","Home")">
+                                        <div class="productinfo text-center">
+                                            <img src="~/wwwroot/images/product/68586199-241768503446139-5363217278462590976-n.jpg" />
+                                            <h2>9.000.000đ</h2>
+                                            <p>Bộ bàn ghễ ghỗ hương</p>
+                                            <a href="product-details.html" class="btn btn-default add-to-cart">
+                                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                                hàng
+                                            </a>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+        <!--/recommended_items-->
+    </div>
+</div>

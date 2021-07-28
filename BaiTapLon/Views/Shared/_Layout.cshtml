@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Trang chủ| Nhóm 5</title>
+    <link href="~/wwwroot/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/prettyPhoto.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/price-range.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/animate.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/main.css" rel="stylesheet" />
+    <link href="~/wwwroot/css/responsive.css" rel="stylesheet" />
+</head>
+<!--/head-->
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <!--header-->
+        @{
+            Html.RenderPartial("_Header");
+        }
+        <!--/header-bottom-->
+    </header>
+    <!--/header-->
+
+    
+
+    <!-- Main -->
+    <section>
+        <div class="container">
+            @RenderBody();
+        </div>
+    </section>
+    <!--End Main-->
+    <!--Footer-->
+    <footer id="footer">
+        @{
+            Html.RenderPartial("_Footer");
+        }
+    </footer>
+    <!--/Footer-->
+
+    <script src="~/wwwroot/js/jquery.js"></script>
+    <script src="~/wwwroot/js/bootstrap.min.js"></script>
+    <script src="~/wwwroot/js/jquery.scrollUp.min.js"></script>
+    <script src="~/wwwroot/js/price-range.js"></script>
+    <script src="~/wwwroot/js/jquery.prettyPhoto.js"></script>
+    <script src="~/wwwroot/js/main.js"></script>
+</body>
+
+</html>
