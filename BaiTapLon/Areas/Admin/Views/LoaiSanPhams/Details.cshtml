@@ -1,0 +1,44 @@
+﻿@model BaiTapLon.Models.LoaiSanPham
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết loại sản phẩm</h2>
+<br />
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Maloai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Maloai)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tenloai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tenloai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mota)
+        </dd>
+
+    </dl>
+</div>
+<br />
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.Maloai.Trim() }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>

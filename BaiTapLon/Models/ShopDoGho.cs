@@ -5,17 +5,17 @@ using System.Linq;
 
 namespace BaiTapLon.Models
 {
-    public partial class ShopQuanLyDoGo : DbContext
+    public partial class ShopDoGho : DbContext
     {
-        public ShopQuanLyDoGo()
-            : base("name=ShopQuanLyDoGo")
+        public ShopDoGho()
+            : base("name=ShopDoGho")
         {
         }
 
         public virtual DbSet<GioHang> GioHangs { get; set; }
+        public virtual DbSet<Giohangsanpham> Giohangsanphams { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<Hoadonsanpham> Hoadonsanphams { get; set; }
-        public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
@@ -23,23 +23,13 @@ namespace BaiTapLon.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GioHang>()
-                .HasMany(e => e.HoaDons)
+                .HasMany(e => e.Giohangsanphams)
                 .WithRequired(e => e.GioHang)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<HoaDon>()
-                .Property(e => e.Ghichu)
-                .IsFixedLength()
-                .IsUnicode(false);
-
-            modelBuilder.Entity<HoaDon>()
                 .HasMany(e => e.Hoadonsanphams)
                 .WithRequired(e => e.HoaDon)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<KhachHang>()
-                .HasMany(e => e.GioHangs)
-                .WithRequired(e => e.KhachHang)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<LoaiSanPham>()
@@ -52,12 +42,22 @@ namespace BaiTapLon.Models
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<SanPham>()
+                .HasMany(e => e.Giohangsanphams)
+                .WithRequired(e => e.SanPham)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SanPham>()
                 .HasMany(e => e.Hoadonsanphams)
                 .WithRequired(e => e.SanPham)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TaiKhoan>()
-                .HasMany(e => e.KhachHangs)
+                .HasMany(e => e.GioHangs)
+                .WithRequired(e => e.TaiKhoan)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TaiKhoan>()
+                .HasMany(e => e.HoaDons)
                 .WithRequired(e => e.TaiKhoan)
                 .WillCascadeOnDelete(false);
         }

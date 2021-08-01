@@ -1,4 +1,11 @@
-﻿
+﻿<style>
+    .shop-menu {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+</style>
+
 <div class="header_top">
     <!--header_top-->
     <div class="container">
@@ -45,26 +52,31 @@
     <!--header-middle-->
     <div class="container">
         <div class="row">
-            <div class="col-sm-4">
-                <div class="logo pull-left">
+            <div class="col">
+                <div class="shop-menu pull-right">
                     <a href="@Url.Action("Index","Home")">
                         <img src="~/wwwroot/images/home/logo.jpg" style="width:200px" />
                     </a>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="shop-menu pull-right">
                     <ul class="nav navbar-nav">
- 
-                        <li>
-                            <a href="@Url.Action("Accout","Home")"><i class="fa fa-user"></i> Tài khoản</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Cart","Home")"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Login","Home")"><i class="fa fa-lock"></i> Đăng nhập</a>
-                        </li>
+                        @if (Session["Hoten"] != null)
+                        {
+                            <li>
+                                <a href="@Url.Action("Accout","Home")"><i class="fa fa-user"></i> @Session["Hoten"]</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","GioHangs", new { userId = Session["Mataikhoan"]})"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Logout","Home")"><i class="fa fa-lock"></i> Đăng xuất</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@Url.Action("Login","Home")"><i class="fa fa-lock"></i> Đăng nhập</a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>
@@ -89,15 +101,8 @@
                 <div class="mainmenu pull-left">
                     <ul class="nav navbar-nav collapse navbar-collapse">
                         <li><a href="@Url.Action("Index","Home")" class="active">Trang chủ</a></li>
-                        <li class="dropdown">
-                            <a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                            <ul role="menu" class="sub-menu">
-                                <li><a href="@Url.Action("Product","Home")">Sản phẩm</a></li>
-                                <li><a href="@Url.Action("Cart","Home")">Giỏ hàng</a></li>
-                                <li><a href="@Url.Action("Login","Home")">Đăng nhập</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact-us.html">Contact</a></li>
+                        
+                        <li><a href="contact-us.html">Liên hệ</a></li>
                     </ul>
                 </div>
             </div>

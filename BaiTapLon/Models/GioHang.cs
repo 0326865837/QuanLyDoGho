@@ -12,7 +12,7 @@ namespace BaiTapLon.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GioHang()
         {
-            HoaDons = new HashSet<HoaDon>();
+            Giohangsanphams = new HashSet<Giohangsanpham>();
         }
 
         [Key]
@@ -21,11 +21,11 @@ namespace BaiTapLon.Models
 
         [Required]
         [StringLength(20)]
-        public string Makh { get; set; }
+        public string Mataikhoan { get; set; }
 
-        public virtual KhachHang KhachHang { get; set; }
+        public virtual TaiKhoan TaiKhoan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoaDon> HoaDons { get; set; }
+        public virtual ICollection<Giohangsanpham> Giohangsanphams { get; set; }
     }
 }

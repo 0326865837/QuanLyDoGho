@@ -26,24 +26,9 @@
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Tìm kiếm..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
+        
         <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Cài đặt</a></li>
-                    <li><a class="dropdown-item" href="#!">Hoạt động đăng nhập</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Đăng xuất</a></li>
-                </ul>
-            </li>
-        </ul>
+        
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -69,50 +54,49 @@
                                 </a>
                                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="@Url.Action("DangNhap","Login")">Đăng nhập</a>
-                                        <a class="nav-link" href="@Url.Action("DangKy","Login")">Đăng ký</a>
-                                        <a class="nav-link" href="@Url.Action("QuenMatKhau","Login")">Quên mật khẩu</a>
+                                        <a class="nav-link" href="@Url.Action("DangNhap","Login")">Đăng Xuất</a>
+
                                     </nav>
                                 </div>
-                               
+
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">Chức năng</div>
 
 
-                        <a class="nav-link" href="@Url.Action("LoaiSp","Home")">
+                        <a class="nav-link" href="@Url.Action("Index","LoaiSanPhams")">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Loại sản phẩm
                         </a>
-                        <a class="nav-link" href="@Url.Action("Sanpham","Home")">
+                        <a class="nav-link" href="@Url.Action("Index","SanPhams")">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Sản phẩm
                         </a>
-                        <a class="nav-link" href="@Url.Action("TaiKhoan","Home")">
+                        <a class="nav-link" href="@Url.Action("Index","TaiKhoans")">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Tài khoản
+                            Tài khoản/ Người dùng/ Khóa tài khoản
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Index","HoaDons")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Đơn hàng
                         </a>
 
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Đăng nhập với tư cách:</div>
-                    Trang chủ
+                   Quản trị viên
                 </div>
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            @RenderBody()
-           
+            <div style="margin-left:30px;">@RenderBody()</div>
+
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Nhóm 5 2021</div>
-                        <div>
-                            <a href="#">Chính sách bảo mật</a>
-                            &middot;
-                            <a href="#">&amp; Điều khoản sử dụng </a>
-                        </div>
+                        <div class="text-muted  ">Copyright &copy; Nhóm 5 2021</div>
+                        
                     </div>
                 </div>
             </footer>
@@ -122,5 +106,6 @@
     <script src="~/Areas/Admin/Assets/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="~/Areas/Admin/Assets/js/datatables-simple-demo.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

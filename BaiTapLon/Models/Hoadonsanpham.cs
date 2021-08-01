@@ -12,7 +12,7 @@ namespace BaiTapLon.Models
         [Key]
         [Column(Order = 0)]
         [StringLength(20)]
-        public string Mahd { get; set; }
+        public string Mahoadon { get; set; }
 
         [Key]
         [Column(Order = 1)]

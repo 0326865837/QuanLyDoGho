@@ -1,0 +1,96 @@
+﻿@model IEnumerable<BaiTapLon.Models.Giohangsanpham>
+
+<style>
+    .cart_product a img {
+        width: 200px;
+    }
+
+    .cart_quantity_input {
+        width: 50px;
+    }
+</style>
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                <li class="active">Giỏ hàng</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Sản phẩm</td>
+                        <td class="description"></td>
+                        <td class="price">Giá</td>
+                        <td class="quantity">Số lượng</td>
+                        <td class="total">Tổng tiền</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cart_product">
+                                @{
+                                    string path = "~/wwwroot/images/product/" + item.SanPham.Anh;
+                                }
+                                <a href="">
+                                    <img src="@Url.Content(path)" />
+                                </a>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">@Html.DisplayFor(m => item.SanPham.Tensanpham)</a></h4>
+                            </td>
+                            <td class="cart_price">
+                                <p class="cart_price_b">@Html.DisplayFor(m => item.SanPham.Dongia) VNĐ</p>
+                            </td>
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="@item.Soluongmua" />
+                                </div>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">@(item.SanPham.Dongia * item.Soluongmua)</p>
+                            </td>
+                            <td class="cart_delete">
+                                <a class="cart_quantity_delete" href="@Url.Action("DeleteOnCart","GioHangs", new { masp = item.Masanpham, magio = item.Magio})"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!--/#cart_items-->
+
+<section id="do_action">
+    <div class="container">
+        <div class="row">
+            <div class="chose-area">
+                <h3 class="">Địa chỉ nhận hàng</h3>
+                <input type="text" name="" id="" class="form-control" placeholder="Nhập địa chỉ nhận hàng" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="total_area">
+                <ul>
+                    <li>Giá<span>12.000.000đ</span></li>
+                    <li>Thuế phát sinh<span>100.000đ</span></li>
+                    <li>Phí vận chuyển<span>Free</span></li>
+                    <li>Tổng tiền<span>12.100.000đ</span></li>
+                </ul>
+                <a class="btn btn-default check_out" href="" style="margin-left: 40px">Đặt hàng</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!--/#do_action-->
+

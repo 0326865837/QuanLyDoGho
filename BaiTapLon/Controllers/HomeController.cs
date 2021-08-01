@@ -9,7 +9,7 @@ namespace BaiTapLon.Controllers
 {
     public class HomeController : Controller
     {
-        private ShopQuanLyDoGo db = new ShopQuanLyDoGo();
+        private ShopDoGho db = new ShopDoGho();
         public ActionResult Index()
         {
             var _product = getAllProduct();
@@ -32,34 +32,47 @@ namespace BaiTapLon.Controllers
             var product = db.SanPhams.Find(id);
             return product;
         }
-        public ActionResult Product_Details()
-        {
-            return View();
-        }
-        public ActionResult addCart(string id)
-        {
-            var cart = HttpContext.Session.GetString("cart");
-            if (cart == null)
-            {
-                var product = getDetailProduct(id);
-                List<GioHang> listCart = new List<GioHang>()
-                {
-                    new GioHang
-                    {
-                        San
-                    }
-                }
-            }
-        }
-        public ActionResult Cart()
-        {
-            return View();
-        }
 
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string tendangnhap, string matkhau)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.TaiKhoans.Where(u => u.Tendangnhap.Equals(tendangnhap) && u.Matkhau.Equals(matkhau)).ToList();
+                if (user.Count() > 0)
+                {
+                    Session["Hoten"] = user.FirstOrDefault().Hoten;
+                    Session["Email"] = user.FirstOrDefault().Email;
+                    Session["Mataikhoan"] = user.FirstOrDefault().Mataikhoan;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.error = "Đăng nhập không thành công";
+                }
+            }
+            return View();
+        }
+        
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+        }
+
+        public ActionResult Cart(string mahoadon)
+        {
+
+            return View();
+        }
+
 
         public ActionResult Accout()
         {

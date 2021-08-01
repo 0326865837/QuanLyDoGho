@@ -20,11 +20,11 @@ namespace BaiTapLon.Models
         public string Maloai { get; set; }
 
         [Required]
-        [StringLength(90)]
+        [StringLength(100)]
         public string Tenloai { get; set; }
 
         [Required]
-        [StringLength(500)]
+        [StringLength(2000)]
         public string Mota { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

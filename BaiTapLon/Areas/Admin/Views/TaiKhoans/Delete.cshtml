@@ -1,0 +1,84 @@
+﻿@model BaiTapLon.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa tài khoản</h2>
+<br />
+
+<h3>Bạn có chắc chắn muốn xóa tài khoản này?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tendangnhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tendangnhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Loaitaikhoan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loaitaikhoan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hoten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hoten)
+        </dd>
+        <dd>
+            @{
+                //Lấy đường dẫn file ảnh
+                string ImagePath = "~/Areas/Admin/wwwroot/Images/" + Model.Anh;
+            }
+            <img src="@Url.Content(ImagePath)" width="300" class="img-thumbnail" />
+            <br />
+            @Html.HiddenFor(model => model.Anh)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diachi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diachi)
+        </dd>
+
+
+
+    </dl>
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>
+@if (ViewBag.Error != null)
+{
+    <br />
+    <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+}

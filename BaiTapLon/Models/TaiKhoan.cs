@@ -12,7 +12,8 @@ namespace BaiTapLon.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TaiKhoan()
         {
-            KhachHangs = new HashSet<KhachHang>();
+            GioHangs = new HashSet<GioHang>();
+            HoaDons = new HashSet<HoaDon>();
         }
 
         [Key]
@@ -20,22 +21,37 @@ namespace BaiTapLon.Models
         public string Mataikhoan { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Email { get; set; }
-
-        [Required]
-        [StringLength(20)]
+        [StringLength(100)]
         public string Tendangnhap { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(100)]
         public string Matkhau { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(100)]
         public string Loaitaikhoan { get; set; }
 
+        [Required]
+        [StringLength(100)]
+        public string Hoten { get; set; }
+
+        [StringLength(100)]
+        public string Sodienthoai { get; set; }
+
+        [StringLength(100)]
+        public string Email { get; set; }
+
+        [StringLength(100)]
+        public string Diachi { get; set; }
+
+        [StringLength(100)]
+        public string Anh { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KhachHang> KhachHangs { get; set; }
+        public virtual ICollection<GioHang> GioHangs { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoaDon> HoaDons { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model BaiTapLon.Models.TaiKhoan
 @{
     ViewBag.Title = "Login";
 }
@@ -11,15 +11,19 @@
                 <div class="login-form">
                     <!--login form-->
                     <h2>Đăng nhập</h2>
-                    <form action="#">
-                        <input type="text" placeholder="Name" />
-                        <input type="email" placeholder="Email Address" />
-                        <span>
-                            <input type="checkbox" class="checkbox" />
-                            Nhớ tài khoản
-                        </span>
-                        <button type="submit" class="btn btn-default">Đăng nhập</button>
-                    </form>
+                    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Tendangnhap, "", new { @class = "form-control", @placeholder = "Tên đăng nhập" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Matkhau, "", new { @class = "form-control", @placeholder = "Mật Khẩu" })
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-primary" value="Đăng nhập" />
+                        </div>
+                    }
                 </div>
                 <!--/login form-->
             </div>

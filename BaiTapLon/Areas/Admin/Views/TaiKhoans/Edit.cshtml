@@ -1,0 +1,145 @@
+﻿@model BaiTapLon.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Phân quyền quản trị viên/ người dùng</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Mataikhoan)
+    <div class="form-group">
+        @Html.HiddenFor(model => model.Hoten, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Hoten)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Hoten)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.HiddenFor(model => model.Tendangnhap, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tendangnhap)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tendangnhap)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.Tendangnhap, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Tendangnhap, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.Matkhau, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.Matkhau, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Matkhau, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <b>
+            @Html.LabelFor(model => model.Loaitaikhoan, htmlAttributes: new { @class = "control-label col-md-2" })
+        </b>
+        <div class="col-md-10">
+            <select class="form-control" id="Loaitaikhoan" name="Loaitaikhoan">
+                <option></option>
+                <option>admin</option>
+                <option>user</option>
+                <option>lock</option>
+            </select>
+           
+            @Html.ValidationMessageFor(model => model.Loaitaikhoan, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.Sodienthoai, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.Sodienthoai, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Sodienthoai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.Diachi, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.Diachi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Diachi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <b>@Html.HiddenFor(model => model.Anh, htmlAttributes: new { @class = "control-label col-md-2" })</b>
+        <div class="col-md-10">
+            <dl>
+                <dd>
+                    <b> Ảnh người dùng :</b>
+                    @{
+                        //Lấy đường dẫn file ảnh
+                        string ImagePath = "~/Areas/Admin/wwwroot/Images/" + Model.Anh;
+                    }
+                    <img src="@Url.Content(ImagePath)" width="300" class="img-thumbnail" />
+                    <br />
+                    @Html.HiddenFor(model => model.Anh)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.Anh, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Phân quyền" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BaiTapLon.Models.HoaDon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông tin đơn hàng</h2><br/>
+
+<hr/>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Mahoadon)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Trangthai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mahoadon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trangthai)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa trạng thái", "Edit", new { id=item.Mahoadon.Trim() }) |
+            @Html.ActionLink("Chi tiết đơn hàng", "Details", new { id=item.Mahoadon.Trim()})        
+        </td>
+    </tr>
+}
+
+</table>

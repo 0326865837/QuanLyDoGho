@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BaiTapLon.Models.TaiKhoan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tài khoản/ Người dùng</h2><br />
+<hr />
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tendangnhap)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.Hoten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Loaitaikhoan)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Tendangnhap)
+    </td>
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Hoten)
+    </td>
+    
+    <td>
+        @{
+            //Lấy đường dẫn file ảnh
+            string ImagePath = "~/Areas/Admin/wwwroot/Images/" + item.Anh;
+        }
+        <img src="@Url.Content(ImagePath)" width="100" class="img-thumbnail" />
+        <br />
+        @Html.DisplayFor(modelItem => item.Anh)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Loaitaikhoan)
+    </td>
+    <td>
+        @Html.ActionLink("Phân quyền", "Edit", new { id = item.Mataikhoan.Trim() }) |
+        @Html.ActionLink("Chi tiết", "Details", new { id = item.Mataikhoan.Trim() }) |
+        @Html.ActionLink("Xóa", "Delete", new { id = item.Mataikhoan.Trim() })
+    </td>
+</tr>
+}
+
+</table>

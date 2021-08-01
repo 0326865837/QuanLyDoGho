@@ -12,6 +12,7 @@ namespace BaiTapLon.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
         {
+            Giohangsanphams = new HashSet<Giohangsanpham>();
             Hoadonsanphams = new HashSet<Hoadonsanpham>();
         }
 
@@ -24,27 +25,30 @@ namespace BaiTapLon.Models
         public string Masanpham { get; set; }
 
         [Required]
-        [StringLength(90)]
+        [StringLength(100)]
         public string Tensanpham { get; set; }
 
         [Required]
-        [StringLength(90)]
+        [StringLength(100)]
         public string Kichthuoc { get; set; }
 
         [Required]
-        [StringLength(90)]
+        [StringLength(100)]
         public string Chatlieu { get; set; }
 
         [Column(TypeName = "money")]
         public decimal Dongia { get; set; }
 
-        [StringLength(90)]
+        [StringLength(1000)]
         public string Anh { get; set; }
 
         public int Soluongton { get; set; }
 
-        [StringLength(500)]
+        [StringLength(2000)]
         public string Mota { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Giohangsanpham> Giohangsanphams { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hoadonsanpham> Hoadonsanphams { get; set; }
