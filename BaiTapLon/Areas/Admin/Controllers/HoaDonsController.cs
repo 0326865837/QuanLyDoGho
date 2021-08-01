@@ -33,10 +33,16 @@ namespace BaiTapLon.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-
+            ViewBag.Taikhoan = getTaiKhoan(id);
+            ViewBag.Mahoadon = id;
             return View(getAllSanPham(id));
         }
-
+        public TaiKhoan getTaiKhoan(string mahd)
+        {
+            var tk = db.TaiKhoans.Join(db.HoaDons, s => s.Mataikhoan, b => b.Mataikhoan, (s, b) => new { s, b })
+                .Where(sc => sc.b.Mahoadon == mahd).Select(s => s.s).FirstOrDefault<TaiKhoan>();
+            return tk;
+        }
         public IList<Hoadonsanpham> getAllSanPham(string mahd)
         {
             var sp = db.Hoadonsanphams.Join(db.SanPhams, s => s.Masanpham, b => b.Masanpham, (s, b) => new { s, b })
