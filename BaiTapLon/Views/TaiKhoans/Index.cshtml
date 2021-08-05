@@ -1,0 +1,105 @@
+﻿@model BaiTapLon.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .mk{
+        display:flex;
+        flex-flow:row;
+        justify-content: space-around;
+        margin: 0 auto;
+    }
+    .tk p{
+        padding: 10px;
+        background-color: #f2f2ff;
+        border-radius: 4px;
+        width: 300px;
+        border: 1px solid #ccc;
+    }
+    .tk span{
+        margin-left: 4px;
+    }
+    .anh{
+      
+    }
+    .btn-button{
+        display:flex;
+        flex-flow: column;
+        margin-top:50px;
+    }
+    .btn-button a{
+        text-decoration:none;
+        color:#fff;
+        background-color: orange;
+        padding:10px 15px;
+        border-radius: 4px;
+        margin-bottom:20px;
+    }
+</style>
+
+<section id=form>
+    <div class="container" style="width: 100%">
+        <div class="row" style="margin:0 auto;">
+            <h2 style="margin-left: 400px; margin-bottom: 50px; color:orange">Thông tin tài khoản</h2>
+            
+            <div class="mk">
+                <div class="anh">
+                    @{
+                        string path = Model.Anh == null ? "~/wwwroot/images/accout/noimg.png" : "~/wwwroot/images/accout/" + Model.Anh;
+                    }
+                    <p>Ảnh đại diện</p>
+                    <img src="@Url.Content(path)" />
+                </div>
+                <div class="tk">
+                    <div>
+                        <span>Tên đăng nhập</span>
+                        <p>
+
+                            @Html.DisplayFor(model => model.Tendangnhap)
+                        </p>
+                    </div>
+
+                    <div>
+                        <span>Họ tên</span>
+                        <p>
+                            @Html.DisplayFor(model => model.Hoten)
+
+                        </p>
+
+                    </div>
+                    <div>
+                        <span>Số điện thoại</span>
+                        <p>
+                            @Html.DisplayFor(model => model.Sodienthoai)
+                        </p>
+                    </div>
+                    <div>
+                        <span>Email</span>
+                        <p>
+                            @Html.DisplayFor(model => model.Email)
+
+                        </p>
+                    </div>
+                    <div>
+                        <span>Địa chỉ</span>
+                        <p>
+                            @Html.DisplayFor(model => model.Diachi)
+
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="btn-button">
+                    <a href="@Url.Action("Edit","TaiKhoans", new { id=Model.Mataikhoan})">Chỉnh sửa</a>
+                    <a href="@Url.Action("Edit","TaiKhoans", new { id=Model.Mataikhoan})">Đổi mật khẩu</a>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</section>
+

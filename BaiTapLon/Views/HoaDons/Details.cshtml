@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model IEnumerable<BaiTapLon.Models.Hoadonsanpham>
+
+<style>
+    .cart_product a img {
+        width: 200px;
+    }
+
+    .cart_quantity_input {
+        width: 50px;
+    }
+</style>
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                <li class="active">Giỏ hàng</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <h4>Mã hóa đơn: @ViewBag.HoaDon.Mahoadon</h4>
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Tên sản phẩm</td>
+                        <td class="description">Hình ảnh</td>
+                        <td class="price">Giá</td>
+                        <td class="quantity">Số lượng</td>
+                        <td class="total">Tổng tiền</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><p>@item.SanPham.Tensanpham</p></td>
+                            <td class="cart_product">
+                                @{
+                                    string path = "~/wwwroot/images/product/" + item.SanPham.Anh;
+                                }
+                                <a href="">
+                                    <img src="@Url.Content(path)" style="width:100px" />
+                                </a>
+                            </td>
+                            <td class="cart_price">
+                                <p class="cart_price_b">@item.SanPham.Dongia</p>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">@item.Soluongmua</a></h4>
+                            </td>
+
+                            <td class="cart_quantity">
+                                <p>@(item.Soluongmua*item.SanPham.Dongia)</p>
+                            </td>
+
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+
+        </div>
+        <div style="border: 1px solid #ccc; padding: 20px">
+
+            <br />
+            <div><h4>Địa chỉ nhận hàng</h4></div>
+            <div> <h4>Thời gian nhận hàng</h4></div>
+            <div><h4>Thời gian đặt hàng</h4></div>
+        </div>
+    </div>
+</section>
+<!--/#cart_items-->

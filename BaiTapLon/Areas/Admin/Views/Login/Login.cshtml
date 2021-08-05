@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_Login.cshtml";
+}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h1 class="heading-section" style="margin-top:20px;"><b>Đăng Nhập</b></h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-wrap p-0">
+
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken();
+                        <div class="form-group" style="margin-top:20px;">
+                            <input type="text" name="username" class="form-control" placeholder="Tên đăng nhập">
+                        </div>
+                        <div class="form-group">
+                            <input id="password-field" type="password" name="password" class="form-control" placeholder="Mật khẩu">
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                        <br />
+                        <div class="w-50">
+                            <label class="checkbox-wrap checkbox-primary">
+                                Nhớ tài khoản
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <br />
+                        <div class="form-group">
+
+                            <button type="submit" name="button" class="form-control btn btn-primary submit px-3">Đăng nhập</button>
+                        </div>
+
+                    }
+                    @if (!string.IsNullOrEmpty(ViewBag.error))
+                    {
+                        <script type="text/javascript">
+                          alert("@ViewBag.error");
+                        </script>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
