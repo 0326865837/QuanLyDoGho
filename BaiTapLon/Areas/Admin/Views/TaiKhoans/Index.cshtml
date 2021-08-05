@@ -1,62 +1,86 @@
-﻿@model IEnumerable<BaiTapLon.Models.TaiKhoan>
-
+﻿@model PagedList.IPagedList<BaiTapLon.Areas.Admin.Models.TaiKhoan>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Tài khoản/ Người dùng</h2><br />
+<h2>Tài khoản/ Người dùng</h2>
+<br />
 <hr />
-
-
+@using (Html.BeginForm())
+{
+    <p>
+        Tìm tài khoản: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm" />
+    </p>
+}
+<hr/>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Tendangnhap)
+          Tên đăng nhập
         </th>
 
 
         <th>
-            @Html.DisplayNameFor(model => model.Hoten)
+           Họ tên
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Anh)
+            Ảnh
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Loaitaikhoan)
+            Loại tài khoản
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Tendangnhap)
-    </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tendangnhap)
+            </td>
 
 
-    <td>
-        @Html.DisplayFor(modelItem => item.Hoten)
-    </td>
-    
-    <td>
-        @{
-            //Lấy đường dẫn file ảnh
-            string ImagePath = "~/Areas/Admin/wwwroot/Images/" + item.Anh;
-        }
-        <img src="@Url.Content(ImagePath)" width="100" class="img-thumbnail" />
-        <br />
-        @Html.DisplayFor(modelItem => item.Anh)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Loaitaikhoan)
-    </td>
-    <td>
-        @Html.ActionLink("Phân quyền", "Edit", new { id = item.Mataikhoan.Trim() }) |
-        @Html.ActionLink("Chi tiết", "Details", new { id = item.Mataikhoan.Trim() }) |
-        @Html.ActionLink("Xóa", "Delete", new { id = item.Mataikhoan.Trim() })
-    </td>
-</tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.Hoten)
+            </td>
+
+            <td>
+                @{
+                    //Lấy đường dẫn file ảnh
+                    string ImagePath = "~/Areas/Admin/wwwroot/Images/" + item.Anh;
+                }
+                <img src="@Url.Content(ImagePath)" width="100" class="img-thumbnail" />
+                <br />
+                @Html.DisplayFor(modelItem => item.Anh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Loaitaikhoan)
+            </td>
+            <td>
+                <button>
+                    @Html.ActionLink("Phân quyền", "Edit", new { id = item.Mataikhoan.Trim() })
+                </button> |
+                <button>
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.Mataikhoan.Trim() })
+                </button> |
+                <button>   @Html.ActionLink("Xóa", "Delete", new { id = item.Mataikhoan.Trim() })</button>
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+<hr />
+<div>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }))
+</div>

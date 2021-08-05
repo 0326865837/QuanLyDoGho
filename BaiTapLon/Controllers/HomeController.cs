@@ -10,19 +10,22 @@ namespace BaiTapLon.Controllers
     public class HomeController : Controller
     {
         private ShopDoGho db = new ShopDoGho();
-        public ActionResult Index()
+        public ActionResult Index(string SearchString)
         {
-            var _product = getAllProduct();
+
+            var _products = db.SanPhams.Select(s=>s);
+            
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                _products = db.SanPhams.Where(p => p.Tensanpham.Contains(SearchString));
+            }
             var _categories = getAllCategories();
-            ViewBag.Product = _product;
             ViewBag.Category = _categories;
-            return View();
+
+            return View(_products.ToList());
         }
 
-        public List<SanPham> getAllProduct()
-        {
-            return db.SanPhams.ToList();
-        }
+
         public List<LoaiSanPham> getAllCategories()
         {
             return db.LoaiSanPhams.ToList();
@@ -67,15 +70,61 @@ namespace BaiTapLon.Controllers
             return RedirectToAction("Login");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(string Tendangnhap, string Email,string Matkhau, string Diachi, string Hoten, string Sodienthoai)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    Random rd = new Random();
+                    int matk = rd.Next(100, 100000);
+                    db.TaiKhoans.Add(new TaiKhoan()
+                    {
+                        Mataikhoan = matk.ToString(),
+                        Diachi = Diachi,
+                        Email = Email,
+                        Hoten = Hoten,
+                        Loaitaikhoan = "user",
+                        Sodienthoai = Sodienthoai,
+                        Matkhau = Matkhau,
+                        Tendangnhap = Tendangnhap,
+                    });
+                    ViewBag.error = "Đăng ký thành công";
+                    db.GioHangs.Add(new GioHang()
+                    {
+                        Mataikhoan = matk.ToString(),
+                        Magio = rd.Next(100, 100000).ToString()
+                    });
+                    db.SaveChanges();
+                    Login(Tendangnhap, Matkhau);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.error = "Đăng ký không thàng công";
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Cart(string mahoadon)
         {
-
+            if(Session["Mataikhoan"] == null)
+            {
+                return RedirectToAction("Login");
+            }
             return View();
         }
 
 
         public ActionResult Accout()
         {
+            if (Session["Mataikhoan"] == null)
+            {
+                return RedirectToAction("Login");
+            }
             return View();
         }
 
@@ -86,6 +135,10 @@ namespace BaiTapLon.Controllers
 
         public ActionResult Product()
         {
+            if (Session["Mataikhoan"] == null)
+            {
+                return RedirectToAction("Login");
+            }
             return View();
         }
     }

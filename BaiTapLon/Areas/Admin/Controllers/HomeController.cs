@@ -8,33 +8,18 @@ namespace BaiTapLon.Areas.Admin.Controllers
 {
     public class HomeController : Controller
     {
+        // GET: Admin/Home
         public ActionResult Index()
         {
-            return View();
+            if(Session["Username"] != null)
+            {
+                return View();
+            }
+            else { 
+            return RedirectToAction("Login","Login");
+            }
         }
-        public ActionResult LoaiSp()
-        {
-            return View();
-        }
-        public ActionResult Sanpham()
-        {
-            return View();
-        }
-        public ActionResult TaiKhoan()
-        {
-            return View();
-        }
-        public ActionResult Them()
-        {
-            return View();
-        }
-        public ActionResult Sua()
-        {
-            return View();
-        }
-        public ActionResult Xoa()
-        {
-            return View();
-        }
+       
+       
     }
 }

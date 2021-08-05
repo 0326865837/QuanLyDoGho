@@ -1,15 +1,14 @@
-﻿@model BaiTapLon.Models.SanPham
+﻿@model BaiTapLon.Areas.Admin.Models.SanPham
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Chi tiết sản phẩm</h2>
-<br />
+<h2>Chi tiết sản phẩm</h2><br/>
 
 <div>
-
+  
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -80,8 +79,9 @@
 
     </dl>
 </div>
-<br />
+<br/>
 <p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.Masanpham }) |
-    @Html.ActionLink("Quay lại", "Index")
+    <button>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.Masanpham }) </button> |
+    <button> @Html.ActionLink("Quay lại", "Index")</button>
 </p>

@@ -1,4 +1,4 @@
-﻿@model BaiTapLon.Models.LoaiSanPham
+﻿@model BaiTapLon.Areas.Admin.Models.LoaiSanPham
 
 @{
     ViewBag.Title = "Delete";
@@ -43,9 +43,10 @@
         @Html.AntiForgeryToken()
         <br />
         <div class="form-actions no-color">
-            <input type="submit" value="Xóa" class="btn btn-default" /> |
-            @Html.ActionLink("Quay lại", "Index")
-        </div>
+            <button>
+                <input type="submit" value="Xóa" class="btn btn-default" /> </button> |
+            <button>  @Html.ActionLink("Quay lại", "Index")</button>
+</div>
     }
 </div>
 @if (ViewBag.Error != null)

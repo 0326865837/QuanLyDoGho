@@ -1,22 +1,43 @@
-﻿using BaiTapLon.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BaiTapLon.Areas.Admin.Models;
+using PagedList;
 
 namespace BaiTapLon.Areas.Admin.Controllers
 {
     public class LoaiSanPhamsController : Controller
     {
-        private ShopDoGho db = new ShopDoGho();
+        private DoGo db = new DoGo();
 
         // GET: Admin/LoaiSanPhams
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            return View(db.LoaiSanPhams.ToList());
+            ViewBag.SapTheoTen = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            var loaisanPhams = db.LoaiSanPhams.Select(p=>p);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                loaisanPhams = loaisanPhams.Where(p => p.Tenloai.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    loaisanPhams = loaisanPhams.OrderByDescending(s => s.Tenloai);
+                    break;
+               
+                default:
+                    loaisanPhams = loaisanPhams.OrderBy(s => s.Tenloai);
+                    break;
+            }
+            int pageSize = 6; //Kích thước trang
+            int pageNumber = (page ?? 1);
+            return View(loaisanPhams.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/LoaiSanPhams/Details/5

@@ -1,4 +1,4 @@
-﻿@model BaiTapLon.Models.LoaiSanPham
+﻿@model BaiTapLon.Areas.Admin.Models.LoaiSanPham
 
 @{
     ViewBag.Title = "Details";
@@ -39,6 +39,7 @@
 </div>
 <br />
 <p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.Maloai.Trim() }) |
-    @Html.ActionLink("Quay lại", "Index")
+    <button>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.Maloai.Trim() }) </button> |
+     <button> @Html.ActionLink("Quay lại", "Index")</button>
 </p>

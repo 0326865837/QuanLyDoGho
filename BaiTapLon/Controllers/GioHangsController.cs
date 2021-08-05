@@ -17,9 +17,13 @@ namespace BaiTapLon.Controllers
         // GET: GioHangs
         public ActionResult Index()
         {
+            if (Session["Mataikhoan"] == null)
+            {
+                return RedirectToAction("Login","Home");
+            }
             string id = Session["Mataikhoan"].ToString();
             string magio = getMaGio(id).Magio;
-            ViewBag.User = magio;
+            ViewBag.Magio = magio;
             return View(getAllSanPham(magio));
         }
 
@@ -30,8 +34,6 @@ namespace BaiTapLon.Controllers
         }
         public IList<Giohangsanpham> getAllSanPham(string magio)
         {
-            //var sp1 = db.SanPhams.Join(db.Giohangsanphams, s => s.Masanpham, b => b.Masanpham, (s, b) => new { s, b })
-            //    .Where(sc => sc.b.Magio == magio).Select(sc => sc.s);
 
             var sp = db.Giohangsanphams.Join(db.SanPhams, s => s.Masanpham, b => b.Masanpham, (s, b) => new { s, b })
                 .Where(sc => sc.s.Magio == magio).Select(s => s.s);
@@ -41,20 +43,46 @@ namespace BaiTapLon.Controllers
 
         public ActionResult AddGioHang(string masp)
         {
+            if (Session["Mataikhoan"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             SanPham sp = db.SanPhams.Find(masp);
             if (sp == null)
             {
                 return HttpNotFound();
             }
             string id = Session["Mataikhoan"].ToString();
-            Giohangsanpham hdsp = new Giohangsanpham()
+            string msp = db.Giohangsanphams.Where(s=>s.Masanpham.Equals(masp)).Select(s=>s).FirstOrDefault().ToString();
+            if(msp == null)
             {
-                Masanpham = sp.Masanpham,
-                Soluongmua = 1,
-                Magio = getMaGio(id).Magio,
-                Trangthai = "thanhtoan",
-            };
-            db.Giohangsanphams.Add(hdsp);
+                Giohangsanpham hdsp = new Giohangsanpham()
+                {
+                    Masanpham = sp.Masanpham,
+                    Soluongmua = 1,
+                    Magio = getMaGio(id).Magio,
+                    Trangthai = "thanhtoan",
+                };
+                db.Giohangsanphams.Add(hdsp);
+                db.SaveChanges();
+            }
+            else
+            {
+               Giohangsanpham gio =  db.Giohangsanphams.Where(s => s.Masanpham.Equals(masp)).Select(s => s).First();
+                gio.Soluongmua += 1;
+                db.SaveChanges();
+            }
+            
+            return RedirectToAction("Index");
+        }
+        public ActionResult DeleteOnCart(string masp, string magio)
+        {
+            if (Session["Mataikhoan"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var sp = db.Giohangsanphams.Where(s=>s.Masanpham.Equals(masp) && s.Magio.Equals(magio)).Select(s=>s).FirstOrDefault();
+            db.Giohangsanphams.Remove(sp);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -64,6 +92,10 @@ namespace BaiTapLon.Controllers
         // GET: GioHangs/Details/5
         public ActionResult Details(string id)
         {
+            if (Session["Mataikhoan"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -76,89 +108,7 @@ namespace BaiTapLon.Controllers
             return View(gioHang);
         }
 
-        // GET: GioHangs/Create
-        public ActionResult Create()
-        {
-            ViewBag.Mataikhoan = new SelectList(db.TaiKhoans, "Mataikhoan", "Tendangnhap");
-            return View();
-        }
 
-        // POST: GioHangs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Magio,Mataikhoan")] GioHang gioHang)
-        {
-            if (ModelState.IsValid)
-            {
-                db.GioHangs.Add(gioHang);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Mataikhoan = new SelectList(db.TaiKhoans, "Mataikhoan", "Tendangnhap", gioHang.Mataikhoan);
-            return View(gioHang);
-        }
-
-        // GET: GioHangs/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            GioHang gioHang = db.GioHangs.Find(id);
-            if (gioHang == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Mataikhoan = new SelectList(db.TaiKhoans, "Mataikhoan", "Tendangnhap", gioHang.Mataikhoan);
-            return View(gioHang);
-        }
-
-        // POST: GioHangs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Magio,Mataikhoan")] GioHang gioHang)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(gioHang).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Mataikhoan = new SelectList(db.TaiKhoans, "Mataikhoan", "Tendangnhap", gioHang.Mataikhoan);
-            return View(gioHang);
-        }
-
-        // GET: GioHangs/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            GioHang gioHang = db.GioHangs.Find(id);
-            if (gioHang == null)
-            {
-                return HttpNotFound();
-            }
-            return View(gioHang);
-        }
-
-        // POST: GioHangs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            GioHang gioHang = db.GioHangs.Find(id);
-            db.GioHangs.Remove(gioHang);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {

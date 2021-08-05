@@ -1,11 +1,11 @@
-﻿@model BaiTapLon.Models.TaiKhoan
+﻿@model BaiTapLon.Areas.Admin.Models.TaiKhoan
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Phân quyền quản trị viên/ người dùng</h2>
+<h2>Phân quyền quản trị viên/ người dùng/Khóa tài khoản</h2>
 
 
 @using (Html.BeginForm())
@@ -130,14 +130,14 @@
     <br />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Phân quyền" class="btn btn-default" />
-        </div>
+            <button> <input type="submit" value="Phân quyền" class="btn btn-default" /></button>
+</div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Quay lại", "Index")
+    <button>@Html.ActionLink("Quay lại", "Index")</button>
 </div>
 
 @section Scripts {

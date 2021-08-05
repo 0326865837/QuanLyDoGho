@@ -1,23 +1,52 @@
-﻿using BaiTapLon.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BaiTapLon.Areas.Admin.Models;
+using PagedList;
 
 namespace BaiTapLon.Areas.Admin.Controllers
 {
     public class SanPhamsController : Controller
     {
-        private ShopDoGho db = new ShopDoGho();
+        private DoGo db = new DoGo();
 
         // GET: Admin/SanPhams
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder,string searchString, string currentFilter, int? page)
         {
+
+            ViewBag.SapTheoTen = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.SapTheoGia = sortOrder == "Gia" ? "gia_desc" : "Gia";
+            //Lấy danh sách hàng
             var sanPhams = db.SanPhams.Include(s => s.LoaiSanPham);
-            return View(sanPhams.ToList());
+            //Lọc theo tên hàng
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                sanPhams= sanPhams.Where(p => p.Tensanpham.Contains(searchString));
+            }
+            //Sap xep
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    sanPhams = sanPhams.OrderByDescending(s => s.Tensanpham);
+                    break;
+                case "Gia":
+                    sanPhams = sanPhams.OrderBy(s => s.Dongia);
+                    break;
+                case "gia_desc":
+                    sanPhams = sanPhams.OrderByDescending(s => s.Dongia);
+                    break;
+                default:
+                    sanPhams =sanPhams.OrderBy(s => s.Tensanpham);
+                    break;
+            }
+            int pageSize = 6; //Kích thước trang
+            int pageNumber = (page ?? 1);
+            return View(sanPhams.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/SanPhams/Details/5
@@ -127,7 +156,7 @@ namespace BaiTapLon.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = "Lỗi nhập dữ liệu! " + ex.Message;
-                ViewBag.Masanpham = new SelectList(db.SanPhams, "Masanpham", "Tensanpham", sanPham.Masanpham);
+                ViewBag.Masanpham= new SelectList(db.SanPhams, "Masanpham", "Tensanpham", sanPham.Masanpham);
                 return View(sanPham);
             }
         }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BaiTapLon.Models.LoaiSanPham>
+﻿@model PagedList.IPagedList<BaiTapLon.Areas.Admin.Models.LoaiSanPham>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -9,15 +10,23 @@
 <br />
 <hr />
 <p>
-    @Html.ActionLink("Thêm loại sản phẩm", "Create")
+    <button> @Html.ActionLink("Thêm loại sản phẩm", "Create")</button>
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Tìm loại sản phẩm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Tenloai)
+           Tên loại sản phẩm
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mota)
+            Mô tả   
         </th>
         <th></th>
     </tr>
@@ -32,11 +41,21 @@
                 @Html.DisplayFor(modelItem => item.Mota)
             </td>
             <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.Maloai.Trim() }) |
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.Maloai.Trim() }) |
-                @Html.ActionLink("Xóa", "Delete", new { id = item.Maloai.Trim() })
+                <button> @Html.ActionLink("Sửa", "Edit", new { id = item.Maloai.Trim() }) </button> |
+                <button> @Html.ActionLink("Chi tiết", "Details", new { id = item.Maloai.Trim() }) </button> |
+                <button> @Html.ActionLink("Xóa", "Delete", new { id = item.Maloai.Trim() })</button>
             </td>
         </tr>
     }
 
-</table>
+</table><br/><hr/>
+<div>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }))
+</div>

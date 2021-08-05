@@ -6,49 +6,47 @@
 
 
 
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 text-center mb-5">
-                    <h1 class="heading-section" style="margin-top:20px;"><b>Đăng Nhập</b></h1>
-                </div>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h1 class="heading-section" style="margin-top:20px;"><b>Đăng Nhập</b></h1>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-4">
-                    <div class="login-wrap p-0">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-wrap p-0">
 
-                        <p style="margin-left:60px; margin-top:-20px;">Chưa có tài khoản?<a href="@Url.Action("DangKy","Login")" style="color: #fff"><b>Đăng ký ngay!</b></a></p>
-                        <form action="#" class="signin-form">
-                            <div class="form-group" style="margin-top:20px;">
-                                <input type="text" class="form-control" placeholder="Tên đăng nhập">
-                            </div>
-                            <div class="form-group">
-                                <input id="password-field" type="password" class="form-control" placeholder="Mật khẩu">
-                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                            </div>
-                            <div class="form-group">
-                                <a href="@Url.Action("Index","Home")" class="form-control btn btn-primary submit px-3"><p style="margin-top:5px;">Đăng nhập</p></a>
-                            </div>
-                            <div class="form-group d-md-flex">
-                                <div class="w-50">
-                                    <label class="checkbox-wrap checkbox-primary">
-                                        Nhớ tài khoản
-                                        <input type="checkbox" checked>
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="w-50 text-md-right">
-                                    <a href="@Url.Action("QuenMatKhau","Login")" style="color: #fff">Quên mật khẩu</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+
+                    <form method="post" action="@Url.Action("Login","Login")" class="signin-form">
+                        <div class="form-group" style="margin-top:20px;">
+                            <input type="text" class="form-control" placeholder="Tên đăng nhập">
+                        </div>
+                        <div class="form-group">
+                            <input id="password-field" type="password" class="form-control" placeholder="Mật khẩu">
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                        <br />
+                        <div class="w-50">
+                            <label class="checkbox-wrap checkbox-primary">
+                                Nhớ tài khoản
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <a href="@Url.Action("Index","Home")" class="form-control btn btn-primary submit px-3"><p style="margin-top:5px;">Đăng nhập</p></a>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-    </section>
+</section>
 
-   
+
 
 

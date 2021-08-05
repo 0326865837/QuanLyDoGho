@@ -1,29 +1,54 @@
-﻿using BaiTapLon.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
+using BaiTapLon.Areas.Admin.Models;
+using PagedList;
 namespace BaiTapLon.Areas.Admin.Controllers
 {
     public class HoaDonsController : Controller
     {
-        private ShopDoGho db = new ShopDoGho();
+        private DoGo db = new DoGo();
 
         // GET: Admin/HoaDons
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            return View(db.HoaDons.ToList());
+            ViewBag.SapTheoma = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            //Lấy danh sách tk
+            var hoadons = db.HoaDons.Select(s => s);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                hoadons = hoadons.Where(p => p.Mahoadon.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    hoadons = hoadons.OrderByDescending(s => s.Mahoadon);
+                    break;
+                default:
+                    hoadons = hoadons.OrderBy(s => s.Mahoadon);
+                    break;
+            }
+            int pageSize = 6; //Kích thước trang
+            int pageNumber = (page ?? 1);
+            return View(hoadons.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/HoaDons/Details/5
         public ActionResult Details(string id)
         {
-            
-            
+            var tk = from a in db.HoaDons
+                     join b in db.TaiKhoans on a.Mataikhoan equals b.Mataikhoan
+                     where b.Mataikhoan.Trim() == id.Trim()
+                     select b.Hoten ;
+
+            ViewBag.taikhoan = tk;
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -33,23 +58,10 @@ namespace BaiTapLon.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Taikhoan = getTaiKhoan(id);
-            ViewBag.Mahoadon = id;
-            return View(getAllSanPham(id));
-        }
-        public TaiKhoan getTaiKhoan(string mahd)
-        {
-            var tk = db.TaiKhoans.Join(db.HoaDons, s => s.Mataikhoan, b => b.Mataikhoan, (s, b) => new { s, b })
-                .Where(sc => sc.b.Mahoadon == mahd).Select(s => s.s).FirstOrDefault<TaiKhoan>();
-            return tk;
-        }
-        public IList<Hoadonsanpham> getAllSanPham(string mahd)
-        {
-            var sp = db.Hoadonsanphams.Join(db.SanPhams, s => s.Masanpham, b => b.Masanpham, (s, b) => new { s, b })
-                .Where(sc => sc.s.Mahoadon == mahd).Select(s => s.s);
-            return sp.ToList();
-        }
 
+            return View(hoaDon);
+        }
+       
         // GET: Admin/HoaDons/Create
         public ActionResult Create()
         {

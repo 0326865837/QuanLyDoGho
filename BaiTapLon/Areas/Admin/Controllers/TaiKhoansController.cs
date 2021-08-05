@@ -1,22 +1,42 @@
-﻿using BaiTapLon.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
+using BaiTapLon.Areas.Admin.Models;
+using PagedList;
 namespace BaiTapLon.Areas.Admin.Controllers
 {
     public class TaiKhoansController : Controller
     {
-        private ShopDoGho db = new ShopDoGho();
+        private DoGo db = new DoGo();
 
         // GET: Admin/TaiKhoans
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            return View(db.TaiKhoans.ToList());
+            ViewBag.SapTheoTen = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+           
+            //Lấy danh sách tk
+            var taiKhoans = db.TaiKhoans.Select(s => s);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                taiKhoans = taiKhoans.Where(p => p.Hoten.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    taiKhoans = taiKhoans.OrderByDescending(s => s.Tendangnhap);
+                    break;
+                default:
+                    taiKhoans = taiKhoans.OrderBy(s => s.Tendangnhap);
+                    break;
+            }
+            int pageSize = 6; //Kích thước trang
+            int pageNumber = (page ?? 1);
+            return View(taiKhoans.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/TaiKhoans/Details/5
@@ -91,12 +111,13 @@ namespace BaiTapLon.Areas.Admin.Controllers
         // GET: Admin/TaiKhoans/Delete/5
         public ActionResult Delete(string id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
-            if (taiKhoan == null)
+            if (taiKhoan == null )
             {
                 return HttpNotFound();
             }
@@ -109,6 +130,11 @@ namespace BaiTapLon.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
+            if ( id == Session["id"].ToString())
+            {
+                ViewBag.Error = "Không xóa được tài khoản  này! " ;
+                return View("Delete", taiKhoan);
+            }
             try
             {
                 db.TaiKhoans.Remove(taiKhoan);

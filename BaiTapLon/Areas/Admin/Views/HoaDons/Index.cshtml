@@ -1,38 +1,62 @@
-﻿@model IEnumerable<BaiTapLon.Models.HoaDon>
-
+﻿@model PagedList.IPagedList<BaiTapLon.Areas.Admin.Models.HoaDon>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Thông tin đơn hàng</h2><br/>
+<h2>Thông tin đơn hàng</h2>
+<br />
+<hr />
 
-<hr/>
+@using (Html.BeginForm())
+{
+    <p>
+        Tìm hóa đơn: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm" />
+    </p>
+}
+<hr />
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Mahoadon)
+            <b>Mã hóa đơn</b>
         </th>
-        
+
         <th>
-            @Html.DisplayNameFor(model => model.Trangthai)
+            <b>Trạng thái</b>
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mahoadon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Trangthai)
-        </td>
-        <td>
-            @Html.ActionLink("Sửa trạng thái", "Edit", new { id=item.Mahoadon.Trim() }) |
-            @Html.ActionLink("Chi tiết đơn hàng", "Details", new { id=item.Mahoadon.Trim()})        
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mahoadon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trangthai)
+            </td>
+            <td>
+                <button>
+                    @Html.ActionLink("Sửa trạng thái", "Edit", new { id = item.Mahoadon.Trim() })
+                </button> |
+                <button>  @Html.ActionLink("Chi tiết đơn hàng", "Details", new { id = item.Mahoadon.Trim() })</button>
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+<hr />
+<div>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }))
+</div>
