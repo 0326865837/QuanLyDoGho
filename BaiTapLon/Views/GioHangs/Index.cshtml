@@ -46,7 +46,7 @@
                                 <h4><a href="">@Html.DisplayFor(m => item.SanPham.Tensanpham)</a></h4>
                             </td>
                             <td class="cart_price">
-                                <p class="cart_price_b">@Html.DisplayFor(m => item.SanPham.Dongia) VNĐ</p>
+                                <p class="cart_price_b">@Html.DisplayFor(m => item.SanPham.Dongia)</p>
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
@@ -54,14 +54,14 @@
                                 </div>
                             </td>
                             <td class="cart_total">
-                                <p class="cart_total_price">@(item.SanPham.Dongia * item.Soluongmua)</p>
+                                <p class="cart_total_price">@((item.SanPham.Dongia * item.Soluongmua).ToString("c"))</p>
                             </td>
                             <td class="cart_delete">
                                 <a class="cart_quantity_delete" href="@Url.Action("DeleteOnCart","GioHangs", new { masp = item.Masanpham, magio = item.Magio})"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
                     }
-
+                    
 
                 </tbody>
             </table>
@@ -72,24 +72,31 @@
 
 <section id="do_action">
     <div class="container">
-        <div class="row">
-            <div class="chose-area">
-                <h3 class="">Địa chỉ nhận hàng</h3>
-                <input type="text" name="" id="" class="form-control" placeholder="Nhập địa chỉ nhận hàng" />
-            </div>
-        </div>
+        @{
+            decimal tongien = 0;
+            foreach (var item in Model)
+            {
+                tongien += (decimal)item.SanPham.Dongia * item.Soluongmua;
+            }
+        }
+
         <div class="col-sm-6">
             <div class="total_area">
                 <ul>
-                    <li>Giá<span>12.000.000đ</span></li>
-                    <li>Thuế phát sinh<span>100.000đ</span></li>
+                    <li>Tổng tiền<span>@tongien.ToString("c")</span></li>
                     <li>Phí vận chuyển<span>Free</span></li>
-                    <li>Tổng tiền<span>12.100.000đ</span></li>
                 </ul>
-                <a class="btn btn-default check_out" href="" style="margin-left: 40px">Đặt hàng</a>
+                @using (Html.BeginForm("Create", "HoaDons", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                        <input name="magio" value="@ViewBag.Magio" style="display:none"/>
+                    <button type="submit" class="btn btn-default check_out">Đặt hàng</button>
+              
+                }
             </div>
         </div>
-    </div>
+        
+
     </div>
 </section>
 <!--/#do_action-->

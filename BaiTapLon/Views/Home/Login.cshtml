@@ -18,7 +18,7 @@
                             @Html.TextBoxFor(m => m.Tendangnhap, "", new { @class = "form-control", @placeholder = "Tên đăng nhập" })
                         </div>
                         <div class="form-group">
-                            @Html.TextBoxFor(m => m.Matkhau, "", new { @class = "form-control", @placeholder = "Mật Khẩu" })
+                            @Html.TextBoxFor(m => m.Matkhau, "", new { @class = "form-control", @placeholder = "Mật Khẩu", @type = "password" })
                         </div>
                         <div class="form-group">
                             <input type="submit" name="submit" class="btn btn-primary" value="Đăng nhập" />
@@ -34,12 +34,31 @@
                 <div class="signup-form">
                     <!--sign up form-->
                     <h2>Tạo tài khoản mới</h2>
-                    <form action="#">
-                        <input type="text" placeholder="User Name" />
-                        <input type="email" placeholder="Email Address" />
-                        <input type="password" placeholder="Password" />
-                        <button type="submit" class="btn btn-default">Đăng kí</button>
-                    </form>
+                    @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Hoten, "", new { @class = "form-control", @placeholder = "Họ tên", @required = "required" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Tendangnhap, "", new { @class = "form-control", @placeholder = "Tên đăng nhập", @required = "required" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email", @required = "required" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Sodienthoai, "", new { @class = "form-control", @placeholder = "Số điện thoại", @required = "required" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Matkhau, "", new { @class = "form-control", @placeholder = "Mật Khẩu", @type = "password", @required = "required" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Diachi, "", new { @class = "form-control", @placeholder = "Địa chỉ", @required = "required" })
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-primary" value="Đăng ký" />
+                        </div>
+                    }
                 </div>
                 <!--/sign up form-->
             </div>
@@ -47,3 +66,9 @@
     </div>
 </section>
 <!--/form-->
+@if (!string.IsNullOrEmpty(ViewBag.error))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.error");
+    </script>
+}

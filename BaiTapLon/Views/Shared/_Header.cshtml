@@ -12,6 +12,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="contactinfo">
+                    
                     <ul class="nav nav-pills">
                         <li>
                             <a href="@Url.Action("Index","Home")"><i class="fa fa-phone"></i> +2 95 01 88 821</a>
@@ -24,6 +25,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="social-icons pull-right">
+                    
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -55,16 +57,19 @@
             <div class="col">
                 <div class="shop-menu pull-right">
                     <a href="@Url.Action("Index","Home")">
-                        <img src="~/wwwroot/images/home/logo.jpg" style="width:200px" />
+                        <img src="~/wwwroot/images/home/logo.png" style="width:100px" />
                     </a>
                     <ul class="nav navbar-nav">
                         @if (Session["Hoten"] != null)
                         {
                             <li>
-                                <a href="@Url.Action("Accout","Home")"><i class="fa fa-user"></i> @Session["Hoten"]</a>
+                                <a href="@Url.Action("Index","TaiKhoans", new { id = Session["Mataikhoan"] })"><i class="fa fa-user"></i> @Session["Hoten"]</a>
                             </li>
                             <li>
                                 <a href="@Url.Action("Index","GioHangs", new { userId = Session["Mataikhoan"]})"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","HoaDons", new { userId = Session["Mataikhoan"]})"><i class="fa fa-shopping-cart"></i> Đơn hàng</a>
                             </li>
                             <li>
                                 <a href="@Url.Action("Logout","Home")"><i class="fa fa-lock"></i> Đăng xuất</a>
@@ -100,15 +105,23 @@
                 </div>
                 <div class="mainmenu pull-left">
                     <ul class="nav navbar-nav collapse navbar-collapse">
-                        <li><a href="@Url.Action("Index","Home")" class="active">Trang chủ</a></li>
                         
+                        
+                        <li><a href="@Url.Action("Index","Home")" class="active">Trang chủ</a></li>
+
                         <li><a href="contact-us.html">Liên hệ</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="search_box pull-right">
-                    <input type="text" placeholder="Tìm kiếm" />
+                    @using (Html.BeginForm("Index", "Home"))
+                    {
+                        <p>
+                            @Html.TextBox("SearchString",null, new { @placeholder="Tìm kiếm"})
+                        </p>
+                    }
+                  
                 </div>
             </div>
         </div>
