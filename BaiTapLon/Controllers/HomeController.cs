@@ -1,4 +1,5 @@
 ﻿using BaiTapLon.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +11,22 @@ namespace BaiTapLon.Controllers
     public class HomeController : Controller
     {
         private ShopDoGho db = new ShopDoGho();
-        public ActionResult Index(string SearchString)
+        public ActionResult Index(string SearchString, int? page)
         {
 
             var _products = db.SanPhams.Select(s=>s);
             
             if (!String.IsNullOrEmpty(SearchString))
             {
-                _products = db.SanPhams.Where(p => p.Tensanpham.Contains(SearchString));
+                _products = _products.Where(p => p.Tensanpham.Contains(SearchString));
             }
+            _products = _products.OrderBy(s => s.Tensanpham);
             var _categories = getAllCategories();
             ViewBag.Category = _categories;
 
-            return View(_products.ToList());
+            int pageSize = 20; //Kích thước trang
+            int pageNumber = (page ?? 1);
+            return View(_products.ToPagedList(pageNumber, pageSize));
         }
 
 

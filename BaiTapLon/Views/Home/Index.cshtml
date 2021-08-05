@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BaiTapLon.Models.SanPham>
+﻿@model PagedList.IPagedList<BaiTapLon.Models.SanPham>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Trang chủ";
@@ -64,7 +65,7 @@
                                     {
 
                                         <a href="@Url.Action("AddGioHang","GioHangs",  new { masp = item.Masanpham })"
-                                           class="btn btn-default add-to-cart">
+                                            class="btn btn-default add-to-cart">
                                             <i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
                                         </a>
                                     }
@@ -85,5 +86,20 @@
         </div>
         <!--features_items-->
 
+    </div>
+</div>
+<div style="width: 100%;display:flex ">
+    <div style="margin: 0 auto" >
+        <p style="text-align:center;">
+
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        </p>
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }))
     </div>
 </div>
