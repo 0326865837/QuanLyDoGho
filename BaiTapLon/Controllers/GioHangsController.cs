@@ -53,8 +53,8 @@ namespace BaiTapLon.Controllers
                 return HttpNotFound();
             }
             string id = Session["Mataikhoan"].ToString();
-            string msp = db.Giohangsanphams.Where(s=>s.Masanpham.Equals(masp)).Select(s=>s).FirstOrDefault().ToString();
-            if(msp == null)
+            var spc = db.Giohangsanphams.Where(s=>s.Masanpham.Equals(masp)).Select(s=>s).FirstOrDefault();
+            if(spc == null)
             {
                 Giohangsanpham hdsp = new Giohangsanpham()
                 {
