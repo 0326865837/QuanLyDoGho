@@ -29,5 +29,6 @@
         [DisplayName("Số lượng mua")]
 
         public virtual HoaDon HoaDon { get; set; }
+        public virtual SanPham SanPham { get; set; }
     }
 }

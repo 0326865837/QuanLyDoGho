@@ -1,46 +1,88 @@
-﻿@model BaiTapLon.Areas.Admin.Models.HoaDon
+﻿@model  IEnumerable<BaiTapLon.Areas.Admin.Models.Hoadonsanpham>
+
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    .tt p{
+        font-weight:700;
+    }
+    .tt span{
+        font-weight:400;
+    }
+    .imgtt{
+        width:200px;
+    }
+</style>
 <h2>Chi tiết đơn hàng</h2>
 <br />
 
 <div>
+    <div class="tt">
+        <p>
+            Mã hóa đơn:<span> @ViewBag.Mahoadon</span>
+        </p>
+        <p>
+            Tên người mua:<span> @ViewBag.Taikhoan.Hoten</span>
+        </p>
+        <p>
+            Đia chỉ: <span>@ViewBag.Taikhoan.Diachi</span>
 
-    <hr />
-    <dl class="dl-horizontal">
+        </p>
+    </div>
+    <table class="table">
+        <thead>
 
+            <tr>
+                <th>Hình ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá tiền</th>
+                <th>Số lượng mua</th>
+                <th>Tổng tiền</th>
+            </tr>
 
+        </thead>
+        <tbody>
 
-
-
-       @ViewBag.tk
-
-
-
-
-
-
-
-
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Trangthai)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Trangthai)
-        </dd>
-
-    </dl>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="cart_product">
+                        @{
+                            string path = "~/wwwroot/images/product/" + item.SanPham.Anh;
+                        }
+                        <a href="">
+                            <img src="@Url.Content(path)"  class="imgtt"/>
+                        </a>
+                    </td>
+                    <td class="cart_description">
+                        <h4>@Html.DisplayFor(m => item.SanPham.Tensanpham)</h4>
+                    </td>
+                    <td class="cart_price">
+                        <p class="cart_price_b">@item.SanPham.Dongia.ToString("c")</p>
+                    </td>
+                    <td class="cart_quantity">
+                        <div class="cart_quantity_button">
+                            @Html.DisplayFor(m => item.Soluongmua)
+                        </div>
+                    </td>
+                    <td class="cart_total">
+                        @{ 
+                            decimal tongtien = item.SanPham.Dongia * item.Soluongmua;
+                        }
+                        <p class="cart_total_price">@tongtien.ToString("c")</p>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <br />
 <p>
     <button>
-        @Html.ActionLink("Sửa tình trạng", "Edit", new { id = Model.Mahoadon.Trim() }) </button> |  
-   <button>@Html.ActionLink("Quay lại", "Index")</button>
+        @Html.ActionLink("Sửa tình trạng", "Edit")
+    </button> |
+    <button>@Html.ActionLink("Quay lại", "Index")</button>
 </p>

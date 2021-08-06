@@ -42,12 +42,6 @@ namespace BaiTapLon.Areas.Admin.Controllers
         // GET: Admin/HoaDons/Details/5
         public ActionResult Details(string id)
         {
-            var tk = from a in db.HoaDons
-                     join b in db.TaiKhoans on a.Mataikhoan equals b.Mataikhoan
-                     where b.Mataikhoan.Trim() == id.Trim()
-                     select b.Hoten ;
-
-            ViewBag.taikhoan = tk;
            
             if (id == null)
             {
@@ -58,10 +52,23 @@ namespace BaiTapLon.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-
-            return View(hoaDon);
+            ViewBag.Taikhoan = getTaiKhoan(id);
+            ViewBag.Mahoadon = id;
+            return View(getAllSanPham(id));
         }
-       
+        public TaiKhoan getTaiKhoan(string mahd)
+        {
+            var tk = db.TaiKhoans.Join(db.HoaDons, s => s.Mataikhoan, b => b.Mataikhoan, (s, b) => new { s, b })
+                .Where(sc => sc.b.Mahoadon == mahd).Select(s => s.s).FirstOrDefault<TaiKhoan>();
+            return tk;
+        }
+        public IList<Hoadonsanpham> getAllSanPham(string mahd)
+        {
+            var sp = db.Hoadonsanphams.Join(db.SanPhams, s => s.Masanpham, b => b.Masanpham, (s, b) => new { s, b })
+                .Where(sc => sc.s.Mahoadon == mahd).Select(s => s.s);
+            return sp.ToList();
+        }
+
         // GET: Admin/HoaDons/Create
         public ActionResult Create()
         {
