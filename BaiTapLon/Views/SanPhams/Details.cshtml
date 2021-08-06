@@ -7,13 +7,84 @@
 
 
 <style>
-    .product-information p{
+    .product-information p {
         color: #000;
         font-weight: 700;
+        margin-right: 10px;
     }
     .product-information span{
         font-weight:500;
+        margin-left: 10px;
     }
+
+    .quantity {
+        position: relative;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .quantity input {
+        height: 42px;
+        line-height: 1.65;
+        float: left;
+        display: block;
+        padding: 0;
+        margin: 0;
+        padding-left: 20px;
+        border: 1px solid #eee;
+        width: 75px;
+    }
+
+        .quantity input:focus {
+            outline: 0;
+        }
+
+
+    .quantity-nav {
+        float: left;
+        position: relative;
+        height: 42px;
+    }
+
+    .quantity-button {
+        position: relative;
+        cursor: pointer;
+        border-left: 1px solid #eee;
+        width: 20px;
+        text-align: center;
+        color: #333;
+        font-size: 13px;
+        font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+        line-height: 1.7;
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+        .quantity-button.quantity-up {
+            position: absolute;
+            height: 50%;
+            top: 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .quantity-button.quantity-down {
+            position: absolute;
+            bottom: -1px;
+            height: 50%;
+        }
 </style>
 <div class="row">
     <div class="col-sm-3">
@@ -32,7 +103,7 @@
                     </div>
 
                 }
-                 <!--/category-products-->
+                <!--/category-products-->
             </div>
         </div>
     </div>
@@ -53,7 +124,7 @@
                     <!--/product-information-->
                     <img src="images/product-details/new.jpg" class="newarrival" alt="" />
                     <h3 style="font-weight:700; font-size: 30px; color:orangered">
-                         @Html.DisplayFor(model => model.Tensanpham)
+                        @Html.DisplayFor(model => model.Tensanpham)
                     </h3>
                     <p>
                         Kích thước: <span> @Html.DisplayFor(model => model.Kichthuoc)</span>
@@ -61,23 +132,22 @@
                     <p>
                         Chất liệu: <span> @Html.DisplayFor(model => model.Chatlieu)</span>
                     </p>
-                        <p> Giá:<span> @Model.Dongia.ToString("C")</span></p>
-                    <div>
-                        <div style="float: left;">
-                            <p>
-                                Số lượng:
-
-                                <input type="text" value="1" style="width: 50px; text-align:center" />
-                            </p>
-                            </div>
+                    <p> Giá:<span> @Model.Dongia.ToString("C")</span></p>
+                    <div style="display: flex;"> 
+                        <p style="margin-top:10px;">
+                            Số lượng:   
+                        </p>
+                                <div class="quantity">
+                                    <input type="number" name="quantity" disabled="disabled" value="1" max="@Model.Soluongton" min="1">
+                                </div>
+                           
                     </div>
-                    <br />
-                    <br />
+
                     <br />
                     <div>
                         @if (Session["Mataikhoan"] != null)
                         {
-
+                           
                             <a href="@Url.Action("AddGioHang","GioHangs",  new { masp = Model.Masanpham })"
                                class="btn btn-default add-to-cart">
                                 <i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
@@ -111,12 +181,50 @@
                             <p>
                                 @Html.DisplayFor(model => model.Mota)
                             </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--/category-tab-->
+            <!--/category-tab-->
 
-        
+
+        </div>
     </div>
-</div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script>
+    jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
+    jQuery('.quantity').each(function () {
+        var spinner = jQuery(this),
+            input = spinner.find('input[type="number"]'),
+            btnUp = spinner.find('.quantity-up'),
+            btnDown = spinner.find('.quantity-down'),
+            min = input.attr('min'),
+            max = input.attr('max');
+
+        btnUp.click(function () {
+            var oldValue = parseFloat(input.val());
+            if (oldValue >= max) {
+                var newVal = oldValue;
+            } else {
+                var newVal = oldValue + 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+        });
+
+        btnDown.click(function () {
+            var oldValue = parseFloat(input.val());
+            if (oldValue <= min) {
+                var newVal = oldValue;
+            } else {
+                var newVal = oldValue - 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+        });
+
+    });
+    </script>
+

@@ -58,7 +58,7 @@
                                     @{
                                         string path_img = "~/wwwroot/images/product/" + item.Anh;
                                     }
-                                    <img src="@Url.Content(path_img)" />
+                                    <img src="@Url.Content(path_img)" style="height:200px" />
                                     <h2>@item.Dongia.ToString("C")</h2>
                                     <p>@item.Tensanpham</p>
                                     @if (Session["Mataikhoan"] != null)

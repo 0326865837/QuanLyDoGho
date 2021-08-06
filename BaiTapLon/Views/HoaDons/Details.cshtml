@@ -13,6 +13,8 @@
     .cart_quantity_input {
         width: 50px;
     }
+
+   
 </style>
 <section id="cart_items">
     <div class="container">
@@ -50,14 +52,18 @@
                                 </a>
                             </td>
                             <td class="cart_price">
-                                <p class="cart_price_b">@item.SanPham.Dongia</p>
+                                <p class="cart_price_b">@item.SanPham.Dongia.ToString("c")</p>
                             </td>
                             <td class="cart_description">
                                 <h4><a href="">@item.Soluongmua</a></h4>
                             </td>
 
                             <td class="cart_quantity">
-                                <p>@(item.Soluongmua*item.SanPham.Dongia)</p>
+                                @{
+                                    decimal tongien = 0;
+                                    tongien = item.SanPham.Dongia * item.Soluongmua;
+                                }
+                                <p>@tongien.ToString("c")</p>
                             </td>
 
                         </tr>

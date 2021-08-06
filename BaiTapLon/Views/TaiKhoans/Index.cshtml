@@ -38,20 +38,22 @@
         border-radius: 4px;
         margin-bottom:20px;
     }
+    .imgtk{
+        width: 300px;
+    }
 </style>
 
 <section id=form>
     <div class="container" style="width: 100%">
         <div class="row" style="margin:0 auto;">
             <h2 style="margin-left: 400px; margin-bottom: 50px; color:orange">Thông tin tài khoản</h2>
-            
             <div class="mk">
                 <div class="anh">
                     @{
-                        string path = Model.Anh == null ? "~/wwwroot/images/accout/noimg.png" : "~/wwwroot/images/accout/" + Model.Anh;
+                        string path =  "~/wwwroot/images/accout/" + Model.Anh;
                     }
                     <p>Ảnh đại diện</p>
-                    <img src="@Url.Content(path)" />
+                    <img src="@Url.Content(path)" class="imgtk" />
                 </div>
                 <div class="tk">
                     <div>
@@ -95,7 +97,6 @@
 
                 <div class="btn-button">
                     <a href="@Url.Action("Edit","TaiKhoans", new { id=Model.Mataikhoan})">Chỉnh sửa</a>
-                    <a href="@Url.Action("Edit","TaiKhoans", new { id=Model.Mataikhoan})">Đổi mật khẩu</a>
                 </div>
             </div>
         </div>
